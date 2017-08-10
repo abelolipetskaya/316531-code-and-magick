@@ -172,9 +172,31 @@
     <p class="setup-similar-label"></p>
   </div>
 </template>
-
 <script>
   var fireballSize = 100;
+</script>
+<script>
+  var fireballSize = 22;
+  var getFireballSpeed = function(left) {
+    if (left) {
+      return 5;
+    } else {
+      return 2;
+    }
+  };
+  var wizardSpeed = 3;
+  var wizardWidth = 70;
+  var getWizardHeight = function() {
+    return 1.337 * wizardWidth;
+  };
+  function getWizardX(width) {
+    var half = 0.5
+    return half * width;
+  };
+  function getWizardY(height) {
+    var part = 2 / 3;
+    return part * height;
+  };
 </script>
 <script src="./js/game.js"></script>
 
