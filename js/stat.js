@@ -1,9 +1,5 @@
-
-window.renderStatistics = function(ctx, names, times) {
-  console.log('Hello, world!');
-  var names = ['Вы', 'Катя', 'Игорь', 'Кекс'];
-  var times = [];
-
+'use strict';
+window.renderStatistics = function (ctx, names, times) {
   var fild = {
     coords: [100, 10],
     width: 420,
@@ -11,52 +7,47 @@ window.renderStatistics = function(ctx, names, times) {
 
   };
 
-  ctx.fillStyle='rgba(0, 0, 0, 0.7)';
-  ctx.fillRect (fild.coords[0] + 10, fild.coords[1] + 10, fild.width, fild.height);
-  ctx.fillStyle="#FFFFFF";
-  ctx.fillRect (fild.coords[0], fild.coords[1], fild.width, fild.height);
-  ctx.fillStyle="#000000";
-  ctx.font='16px PT Mono';
-  ctx.fillText ('Ура вы победили!', 120, 40);
-  ctx.fillText ('Список результатов:', 120, 60);
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect(fild.coords[0] + 10, fild.coords[1] + 10, fild.width, fild.height);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(fild.coords[0], fild.coords[1], fild.width, fild.height);
+  ctx.fillStyle = '#000000';
+  ctx.font = '16px PT Mono';
+  ctx.fillText('Ура вы победили!', 120, 40);
+  ctx.fillText('Список результатов:', 120, 60);
 
-  for(var i = 0 ; i < names.length; i ++) {
+  for (var i = 0; i < names.length; i++) {
     if (names.length !== times.length) {
-        times.push(i + 1000);
+      times.push(i + 1000);
     }
   }
 
-  console.log(times);
-
   var histogram = {
-    coords: [140, 90],
+    coords: [140, 100],
     width: 40,
     height: 150,
     indent: 100,
-    color_my: 'rgba(255, 0, 0, 1)', //мой цвет
-    color_they: 'rgba(23, 44, 251, 1)', //цвет других игроков
-  }
+    colorMy: 'rgba(255, 0, 0, 1)', // мой цвет
+  };
 
-  for(var i = 0 ; i < names.length ; i++) {
+
+  for (var i = 0; i < names.length; i++) {
+    var alpha = Math.random();
+    var colorThey = 'rgba(2, 14, 134,' + alpha + ')';
     if (names[i] === 'Вы') {
-      ctx.fillStyle = histogram.color_my;
+      ctx.fillStyle = histogram.colorMy;
     } else {
-      ctx.fillStyle = histogram.color_they;
+      ctx.fillStyle = colorThey;
     }
 
-    ctx.fillRect (histogram.coords[0], histogram.coords[1], histogram.width, histogram.height + (times[i] / 100));
-    ctx.fillText (times[i], histogram.coords[0], histogram.coords[1] - 15);
-    ctx.fillText (names[i], histogram.coords[0], histogram.coords[1] + histogram.height + (times[i] / 100) + 20);
+
+    ctx.fillRect(histogram.coords[0], histogram.coords[1], histogram.width, histogram.height + (Math.round(times[i]) / 1000));
+    ctx.fillStyle = '#000000';
+    ctx.fillText(Math.round(times[i]), histogram.coords[0], histogram.coords[1] - 15);
+    ctx.fillStyle = '#000000';
+    ctx.fillText(names[i], histogram.coords[0], histogram.coords[1] + histogram.height + (Math.round(times[i]) / 1000) + 20);
     histogram.coords[0] += histogram.indent;
 
   }
 
 };
-
-
-
-
-
-
-
-
